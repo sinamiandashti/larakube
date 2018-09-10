@@ -13,8 +13,12 @@ before_script:
 script:
   - composer create-project "laravel/laravel" app --prefer-dist
   - cp -r app/* .
-  - docker build -t rennokki/lar8s:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER} .
+  - rm -rf app/
+  - docker build . -t rennokki/lar8s:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
   - docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
   - docker push rennokki/lar8s:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
   - docker run rennokki/lar8s:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
+  - docker kill $(docker containers -aq)
+  - docker build docker/php-fpm/ -t lar8s-php-fpm:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
+  - docker run rennokki/lar8s-php-fpm:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
   - docker kill $(docker containers -aq)
