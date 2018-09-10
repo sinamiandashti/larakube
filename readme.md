@@ -128,11 +128,11 @@ There are two ways you can create ingress using provided ingress configurations:
 * ingress on HTTP (without TLS)
 * ingress on HTTPS (requires certificates)
 
-To create an ingress on HTTP, simply edit `kubernetes/ngin/ingress.yaml` and replace the `kubernetes.test` domain with your own. This steps occurs even on TLS ingress.
+To create an ingress on HTTP, simply edit `kubernetes/nginx/ingress.yaml` and replace the `kubernetes.test` domain with your own. This steps occurs even on TLS ingress.
 
 After this, add the Ingress configuration to the Minikube:
 ```bash
-$ kubectl create -f kubernetes/ngin/ingress.yaml
+$ kubectl create -f kubernetes/nginx/ingress.yaml
 ```
 
 Edit your computer's hosts file with your Minikube's IP and the domain you have just replaced in the ingress file. To get the Minikube IP, run:
