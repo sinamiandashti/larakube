@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/rennokki/lar8s.svg?branch=master)](https://travis-ci.org/rennokki/befriended)
+[![Build Status](https://travis-ci.org/rennokki/lar8s.svg?branch=master)](https://travis-ci.org/rennokki/lar8s)
 
 [![PayPal](https://img.shields.io/badge/PayPal-donate-blue.svg)](https://paypal.me/rennokki)
 
