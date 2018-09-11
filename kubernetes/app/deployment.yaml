@@ -64,9 +64,9 @@ spec:
           volumeMounts:
             - name: laravel-app-volume
               mountPath: /var/www
-          env:
-            - name: MASTER
-              value: "true"
+          envFrom:
+            - secretRef:
+                name: laravel-app-secrets
         - name: nginx
           image: nginx:latest
           imagePullPolicy: Always
