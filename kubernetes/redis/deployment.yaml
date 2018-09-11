@@ -19,9 +19,13 @@ spec:
         - name: redis-persistent-volume
           persistentVolumeClaim:
             claimName: redis-pvc
+        - name: redis-config-volume
+          configMap:
+            name: redis.config
+        - name: supervisord-config-volume
       containers:
         - image: redis:4.0.11
-          command: ['redis-server']
+          command: ['redis-server', '/usr/local/etc/redis/redis.conf']
           name: redis
           imagePullPolicy: Always
           resources:
@@ -37,3 +41,6 @@ spec:
           volumeMounts:
             - name: redis-persistent-volume
               mountPath: /data
+            - name: redis-config-volume
+              mountPath: /usr/local/etc/redis/redis.conf
+              subPath: redis.conf

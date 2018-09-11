@@ -9,10 +9,13 @@ before_script:
   - sudo apt-get install curl git unzip
 
 script:
+  - docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
   - git clone https://github.com/laravel/laravel.git app
   - cp -r app/* .
   - rm -rf app/
   - docker build . -t rennokki/lar8s:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
-  - docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
   - docker push rennokki/lar8s:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
-  - docker build docker/php-fpm/ -t lar8s-php-fpm:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
+  - docker build docker/php-fpm/ -t rennokki/lar8s-php-fpm:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
+  - docker push rennokki/lar8s-php-fpm:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
+  - docker build docker/supervisord/ -t rennokki/lar8s-supervisord:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
+  - docker push rennokki/lar8s-supervisord:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}

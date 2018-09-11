@@ -26,6 +26,9 @@ spec:
         - name: nginx-config-volume
           configMap:
             name: nginx.config
+        - name: supervisord-config-volume
+          configMap:
+            name: supervisord.config
       hostAliases:
         - ip: "127.0.0.1"
           hostnames:
@@ -33,7 +36,7 @@ spec:
       initContainers:
         - name: app
           image: rennokki/lar8s:1.0.0
-          command: ['sh', '-c', 'cp -rp /var/www/* /app/']
+          command: ['/bin/sh', '-c', 'cp -rp /var/www/* /app/']
           imagePullPolicy: Always
           resources:
             limits:
@@ -85,3 +88,20 @@ spec:
             - name: nginx-config-volume
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
+        - name: supervisord
+          image: rennokki/lar8s-supervisord:1.0.0
+          command: ['/bin/sh', '-c', '/usr/bin/supervisord --nodaemon --configuration /etc/supervisord.conf']
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 100m
+              memory: 64Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+          volumeMounts:
+            - name: laravel-app-volume
+              mountPath: /var/www
+            - name: supervisord-config-volume
+              mountPath: /etc/supervisord.conf
+              subPath: supervisord.conf

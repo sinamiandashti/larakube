@@ -59,6 +59,8 @@ Then you can push it to the registry (after logging into Docker CLI):
 $ docker push rennokki/lar8s-php-fpm:1.0.0
 ```
 
+This also applies with `supervisord` which you can find in an adjancent folder in `docker/`.
+
 # Installing Minikube
 For testing purposes, Minikube is perfect. [Make sure you install your own.](https://github.com/kubernetes/minikube)
 
@@ -78,13 +80,14 @@ $ minikube dashboard
 ```
 
 # Configuring Kubernetes' Laravel app.
-Deploying your app is based on Deployments. You create a deployment configuration for your Laravel app, NGINX and PHP-FPM, that all come into the same pod, to communicate easily between them - NGINX serves as a frontend proxy, PHP-FPM is your backend environment and your app lies in the last container.
+Deploying your app is based on Deployments. You create a deployment configuration for your Laravel app, NGINX and PHP-FPM with Supervisord, that all come into the same pod, to communicate easily between them - NGINX serves as a frontend proxy, PHP-FPM is your backend environment and your app lies in the last container.
 
-When scaling using an autoscaler (which is provided), they all 3 will scale and it will be easy to load balance between them.
+When scaling using an autoscaler (which is provided), they all 4 will scale and it will be easy to load balance between them.
 
 First of all, open the `kubernetes/app/deployment.yaml` and change the following:
 * `rennokki/lar8s:1.0.0` with your app's container build previously
 * `rennokki/lar8s-php-fpm:1.0.0` with your PHP-FPM container built previously
+* `rennokki/lar8s-supervisord:1.0.0` with your Supervisord container build previously
 * In the `resources` of each container, adapt your resources needs.
 
 Open `kubernetes/app/secrets.yaml` and, under the `data`, add your Laravel's .env variables. This will not operate by configuring your own `.env` file from `.env.example`, this is done by explicitly passing secrets. Make sure you encode your strings in Base64 before adding them to the YAML file.
@@ -161,6 +164,7 @@ To run Redis in a pod, alone, run the following commands, in this order:
 ```bash
 $ kubectl create -f kubernetes/redis/service.yaml
 $ kubectl create -f kubernetes/redis/deployment.yaml
+$ kubectl create -f kubernetes/redis/config.yaml
 ```
 
 If you wish to have persistent data, edit the `kubernetes/redis/volume.yaml` to fit your needs (in terms of space) and run:
@@ -183,6 +187,3 @@ $ kubectl create -f kubernetes/postgres/deployment.yaml
 * MongoDB
 * Elasticsearch
 * MySQL/MariaDB
-
-
-
