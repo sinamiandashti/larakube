@@ -34,7 +34,7 @@ spec:
               cpu: 250m
               memory: 512Mi
           ports:
-            - containerPort: 3306
+            - containerPort: 5432
               name: pgsql
           volumeMounts:
             - name: pgsql-persistent-volume

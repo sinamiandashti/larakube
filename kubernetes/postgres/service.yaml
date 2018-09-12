@@ -10,7 +10,7 @@ spec:
     app: pgsql
   type: ClusterIP
   ports:
-    - port: 3306
-      targetPort: 3306
+    - port: 5432
+      targetPort: 5432
       protocol: TCP
       name: pgsql
