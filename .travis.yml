@@ -17,5 +17,3 @@ script:
   - docker push rennokki/lar8s:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
   - docker build docker/php-fpm/ -t rennokki/lar8s-php-fpm:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
   - docker push rennokki/lar8s-php-fpm:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
-  - docker build docker/supervisord/ -t rennokki/lar8s-supervisord:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
-  - docker push rennokki/lar8s-supervisord:${TRAVIS_BUILD_ID}-${TRAVIS_BUILD_NUMBER}
