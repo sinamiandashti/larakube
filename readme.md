@@ -184,6 +184,5 @@ $ kubectl create -f kubernetes/postgres/deployment.yaml
 ```
 
 # Coming soon
-* MongoDB
 * Elasticsearch
 * MySQL/MariaDB
