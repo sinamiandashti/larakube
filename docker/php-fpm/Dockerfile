@@ -32,7 +32,7 @@ RUN apt-get update -yqq \
 RUN docker-php-ext-install bcmath bz2 dom exif fileinfo hash iconv json mbstring mysqli opcache pcntl pdo pdo_mysql pdo_pgsql pgsql tokenizer xml zip
 
 # PECL
-RUN pecl install swoole mongo imagick xdebug
+RUN pecl install swoole mongodb imagick xdebug
 RUN printf "\n" | pecl install -o -f redis
 
 # ZIP ARCHIVE
@@ -55,7 +55,7 @@ RUN curl -L -o /tmp/memcached.tar.gz "https://github.com/php-memcached-dev/php-m
     && rm /tmp/memcached.tar.gz
 
 # ENABLING EXTENSIONS
-RUN docker-php-ext-enable swoole redis xdebug memcached imagick pcntl bcmath pgsql exif opcache mysqli tokenizer zip pgsql pdo_mysql pdo_pgsql
+RUN docker-php-ext-enable swoole redis xdebug memcached imagick pcntl bcmath pgsql exif opcache mysqli tokenizer zip pgsql pdo_mysql pdo_pgsql mongodb
 
 # COPYING CONFIGURATIONS
 COPY ./opcache.ini /usr/local/etc/php/conf.d/opcache.ini
