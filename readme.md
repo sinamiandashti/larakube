@@ -89,18 +89,22 @@ First of all, open the `kubernetes/app/deployment.yaml` and change the following
 
 Open `kubernetes/app/secrets.yaml` and, under the `data`, add your Laravel's .env variables. This will not operate by configuring your own `.env` file from `.env.example`, this is done by explicitly passing secrets. Make sure you encode your strings in Base64 before adding them to the YAML file.
 
-Open `kubernetes/app/volume.yaml` and change `5Gi` to suit your application's needs on persisting volume capacity.
+If you want persistent data (note recommended since your app container will not get the latest data) open `kubernetes/app/volume.yaml` and change `5Gi` to suit your application's needs on persisting volume capacity.
 
 Open `kubernetes/nginx/config.yaml` and change your NGINX's configuration. You can leave it like that, it's working too.
 
 After you've done editing the Kubernetes configurations, run the following commands. This will take care of all the secrets, volumes and services for your PHP-FPM, NGINX and Laravel app containers:
 ```bash
 $ kubectl create -f kubernetes/app/secrets.yaml
-$ kubectl create -f kubernetes/app/volume.yaml
 ```
 ```bash
 $ kubectl create -f kubernetes/nginx/config.yaml
 $ kubectl create -f kubernetes/nginx/service.yaml
+```
+
+If you opted for persistent volume:
+```bash
+$ kubectl create -f kubernetes/app/volume.yaml
 ```
 
 After this, hit the deployment files to start creating the pods needed:
