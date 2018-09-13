@@ -25,9 +25,6 @@ spec:
         - name: nginx-config-volume
           configMap:
             name: nginx.config
-        - name: laravel-app-config-volume
-          configMap:
-            name: laravel-app.config
       hostAliases:
         - ip: "127.0.0.1"
           hostnames:
