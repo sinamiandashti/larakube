@@ -54,6 +54,6 @@ data:
         location = /robots.txt  { access_log off; log_not_found off; }
 
         access_log off;
-        error_log  /var/log/nginx/renoki.eu-error.log error;
+        error_log  /var/log/nginx/laravel-error.log error;
       }
     }
