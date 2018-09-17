@@ -9,6 +9,17 @@ Lar8s is a package that helps you scaffold better your Laravel app on Kubernetes
 To find more about how to deploy your Laravel app in Kubernetes, check [this Medium article](https://medium.com/@alexrenoki/run-laravel-on-kubernetes-5259188b10ca) that explains the concepts and the methodology using this specific repo.
 This readme provides only documentation on running microservices, like Redis, Postgres or MongoDB.
 
+# Running on GCP, MacOS or Docker with Kubernetes on Windows
+You need to set up a load balancer since it's not provided, so you'll end up with no IP address to connect to. To fix this, add the load balancer provided:
+```
+$ kubectl create -f kubernetes/nginx/load-balancer.yaml
+```
+
+Simply get the services and seek for your IP:
+```bash
+$ kubectl get svc
+```
+
 # Running Redis
 Running specific services is easier. 
 
