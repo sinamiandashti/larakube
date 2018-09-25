@@ -24,7 +24,7 @@ spec:
           emptyDir: {}
         - name: nginx-config-volume
           configMap:
-            name: nginx.config
+            name: nginx-config
       hostAliases:
         - ip: "127.0.0.1"
           hostnames:
@@ -47,8 +47,6 @@ spec:
           envFrom:
             - secretRef:
                 name: laravel-app-secrets
-            - configMapRef:
-                name: laravel-app.config
       containers:
         - name: php-fpm
           image: rennokki/lar8s-php-fpm:1.0.0
@@ -68,8 +66,6 @@ spec:
           envFrom:
             - secretRef:
                 name: laravel-app-secrets
-            - configMapRef:
-                name: laravel-app.config
         - name: nginx
           image: nginx:latest
           imagePullPolicy: Always

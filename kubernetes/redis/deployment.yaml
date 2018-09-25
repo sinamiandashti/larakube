@@ -21,7 +21,7 @@ spec:
             claimName: redis-pvc
         - name: redis-config-volume
           configMap:
-            name: redis.config
+            name: redis-config
       containers:
         - image: redis:4.0.11
           command: ['redis-server', '/usr/local/etc/redis/redis.conf']

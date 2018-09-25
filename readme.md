@@ -38,7 +38,7 @@ $ kubectl create -f kubernetes/redis/volume.yaml
 ```
 
 # Running Postgres
-Running Postgres is easy. First, modify the `kubernetes/postgres/deployment.yaml` file and set your desired resources counts. Then, modify the `kubernetes/postgres/secrets.yaml` with your base64-encoded values. For persistent data, change the `kubernetes/postgres/volume.yaml` file.
+Running Postgres is easy. First, modify the `kubernetes/postgres/deployment.yaml` file and set your desired resources counts. Then, modify the `kubernetes/postgres/secrets.yaml` with your values. For persistent data, change the `kubernetes/postgres/volume.yaml` file.
 
 Run the configurations and all should be fine:
 ```bash

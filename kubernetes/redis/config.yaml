@@ -1,9 +1,9 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: redis.config
+  name: redis-config
   labels:
-    name: redis.config
+    name: redis-config
 data:
   redis.conf: |
     # Redis configuration file example.
