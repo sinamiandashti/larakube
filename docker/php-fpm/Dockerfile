@@ -74,5 +74,6 @@ RUN rm -rf /tmp/pear \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && rm /var/log/lastlog /var/log/faillog
 
+
 WORKDIR /var/www
 CMD ["php-fpm"]
