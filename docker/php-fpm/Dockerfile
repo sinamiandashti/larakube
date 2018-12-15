@@ -74,6 +74,9 @@ RUN rm -rf /tmp/pear \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && rm /var/log/lastlog /var/log/faillog
 
+RUN apt-get install curl && \
+  curl -sS https://getcomposer.org/installer | php \
+  && chmod +x composer.phar && mv composer.phar /usr/local/bin/composer
 
 WORKDIR /var/www
 CMD ["php-fpm"]
